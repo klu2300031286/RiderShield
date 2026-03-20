@@ -1,174 +1,291 @@
 # RiderShield
-🚀 Overview
+🌍 Overview
 
-RiderShield AI is a protection platform for delivery workers. These workers rely on what they earn every day. Things like bad weather and pollution can reduce their income. Our system uses intelligence and real-time environmental data to detect when this happens and gives them financial support right away. They do not have to do anything to get this help.
+RiderShield is a simple protection system designed for delivery workers. Most delivery partners depend on daily earnings, and factors like heavy rain, extreme heat, or bad air quality can directly reduce how much they earn.
 
-👤 Target User (Delivery Partner)
+Our idea is to use real-time environmental data and smart logic to detect such situations and automatically provide financial support. 
 
-The people we are helping are delivery riders who work with food delivery services. They usually:
+The goal is to make sure riders don’t have to worry about income loss during difficult conditions.
 
-* Rely on delivering food every day to get paid
 
-* Have to work in conditions that can be bad because of the weather and environment
+👤 Target Users
 
-* Want to pay for insurance that's affordable and flexible and they can pay for it every week
+This platform is mainly for delivery partners working with food delivery apps. These users:
 
-* Want a solution that is easy to use and does not require them to do a lot of work
+•	Earn money on a daily basis
+
+•	Work in unpredictable weather conditions
+
+•	Need affordable and flexible insurance
+
+•	Prefer simple systems that don’t require manual effort
+
 
 📊 Problem Statement
 
-Delivery workers often lose around 20-30 percent of their income because of things like:
+Delivery workers often lose around 20–30% of their daily income due to:
 
-* Rain that means people do not want food delivered
+•	Rain reducing order demand
 
-* High temperatures that mean they can not work for as long
+•	Extreme temperatures limiting working hours
 
-* Air quality that makes them sick and less productive
+•	Poor air quality affecting health
 
-Right now there is no system that helps them with these losses so they can have money problems.
+Right now, there is no proper system that compensates for these losses in real time.
+
 
 💡 Proposed Solution
 
-We want to help with this problem by creating a system that makes sure delivery workers have an income. Our idea is based on the problems that gig workers face. They are very important for delivery services. They do not have good financial protection.
+RiderShield AI provides a parametric insurance system for gig workers.
 
-RiderShield AI gives them insurance that kicks in automatically when something bad happens.
+Instead of manually applying for claims, the system:
 
-⚙️ Working Mechanism
+•	Detects difficult conditions automatically
 
-The platform works like this:
+•	Calculates risk using data
 
-* It always checks the weather and air quality
+•	Triggers payouts instantly
 
-* It uses intelligence to figure out how much they should pay for insurance every week
+•	This helps riders maintain stable income without extra effort.
 
-* It looks for problems based on things like how much rain's falling
 
-* It automatically helps them when it finds a problem. They do not have to ask for help
+⚙️ How It Works
 
-* It checks for claims before it gives them money
+•	The system continuously tracks weather and air quality
 
-* It gives them money away when they lose income
+•	It calculates a risk score based on environmental conditions
 
-🧠 AI-Based Risk Model
+•	Riders pay a small weekly premium
 
-To figure out how much risk there is the system looks at:
+•	When conditions cross certain limits, payouts are triggered automatically
 
-* How much rain is falling
+•	Before payout, a verification check is performed
 
-* How hot or cold it is
 
-* How bad the air quality is
+🧠 Risk Model (Simple Explanation)
 
-* Where they are
+We calculate a risk score using:
 
-It uses a formula to calculate the risk so each thing it looks at contributes to the risk.
+•	Rainfall
 
-👉 Then it uses this risk score to figure out how much they should pay for insurance. The system is fair and adapts to what is happening.
+•	Temperature
+
+•	Air Quality Index (AQI)
+
+•	Location
+
+This score helps decide how risky the situation is and how pricing should be adjusted.
+
 
 🌦️ Trigger Conditions
 
-The system automatically helps them when:
+The system provides support when:
 
-* It rains than 50 mm in a day
+•	Rainfall is more than 50 mm/day
 
-* It gets hotter than 40°C
+•	Temperature exceeds 40°C
 
-* The air quality is very bad
+•	Air quality reaches unhealthy levels
 
-When any of these things happen the system knows they are having trouble working and gives them money away.
+These conditions usually reduce a rider’s ability to work effectively.
 
-🛡️ Fraud Prevention System
 
-To make sure everything is fair and people do not cheat we have ways to check what is happening:
+🛡️ Fraud Prevention (Basic Idea)
 
-* We check where they are using GPS and other ways
+To keep the system fair, we already check:
 
-* We look at what they're doing and when they are working
+•	User location
 
-* We check what device they are using. If someone else is using it too
+•	Activity patterns
 
-* We look for patterns that seem
+•	Device usage
 
-🚫 Possible Fraud Scenarios
+•	Unusual behaviour
 
-We watch out for things like:
 
-* Using GPS to make it seem like they are somewhere else
+🚨 Adversarial Defence & Anti-Spoofing Strategy
 
-* Creating accounts to get more money
+Recently, we identified a major risk: GPS spoofing attacks, where users fake their location to claim money.
 
-* Working with others to make claims
+To handle this, we improved our system beyond simple GPS checks.
 
-* Trying to get money when they are not even working
 
-🧠 Advanced Fraud Detection
+1️⃣ How We Differentiate Real vs Fake Users
 
-The system uses intelligence to look for suspicious behavior like:
+Instead of trusting only location, we look at real-world behaviour.
 
-* Changing location quickly
+A genuine rider usually:
 
-* Making many claims from the same place
+•	Moves naturally across routes
 
-* Doing the things as other people who are making claims
+•	Has realistic speed changes (traffic, stops, deliveries)
 
-This helps us find people who are trying to cheat and makes sure only people who really need help get money.
+•	Uses the delivery app actively
+
+•	Experiences weather that matches their location
+
+A fake/spoofed user usually:
+
+•	Shows unrealistic or static movement
+
+•	Has no actual delivery activity
+
+•	Claims weather conditions that don’t match real data
+
+•	Shows patterns similar to other suspicious users
+
+We use basic anomaly detection logic to identify such differences.
+
+
+2️⃣ What Data We Use (Beyond GPS)
+
+To make the system stronger, we check multiple signals:
+
+
+📱 Device Data
+
+•	Movement from accelerometer
+
+•	Phone orientation and motion
+
+Whether the device is actually moving or not
+
+
+🌐 Network Data
+
+•	IP address patterns
+
+•	Multiple users using the same network
+
+•	Sudden location jumps
+
+
+📦 Work Activity
+
+Orders accepted and completed
+
+•	Time spent working vs idle
+
+•	Distance travelled
+
+
+🌦️ Environmental Matching
+
+•	Compare user location with actual weather data
+
+•	Check consistency with nearby users
+
+
+👥 Group Fraud Detection
+
+Identify users with:
+
+•	Same claim timing
+
+•	Same location clusters
+
+•	Similar behaviour patterns
+
+•	This helps detect organized fraud groups.
+
+
+3️⃣ User Experience (UX) Balance
+
+We want to stop fraud without affecting honest users.
+
+So we designed a fair system:
+
+
+🟢 Low Risk
+
+•	No suspicious activity
+
+•	Instant payout
+
+
+🟡 Medium Risk
+
+•	Small verification step (like app confirmation or quick check)
+
+
+🔴 High Risk
+
+•	Claim is temporarily held
+
+•	Reviewed manually
+
+•	User can appeal
+
+
+🤝 Important Focus
+
+•	No unnecessary blocking
+
+•	Clear communication with users
+
+•	Quick resolution process
+
+•	Trust improves over time for genuine users
+
+
+🚫 Possible Fraud Cases
+
+•	Fake GPS location
+
+•	Multiple account creation
+
+•	Group-based fake claims
+
+•	Claiming without actually working
+
 
 🔄 System Workflow
 
-Here is how it works:
+•	User selects a weekly plan
 
-* They choose an insurance plan for the week
+•	System calculates risk and premium
 
-* The system uses intelligence to figure out the risk and how much they should pay
+•	Weather and environment are monitored continuously
 
-* The system always checks the weather and air quality
+•	Trigger condition is detected
 
-* If something bad happens it automatically helps them
+•	Fraud checks are applied
 
-* It checks for claims
+•	Payout is processed (or flagged if needed)
 
-* If everything is okay it gives them money
 
-🏗️ System Architecture
+🏗️ System Architecture (High-Level)
 
-The system is designed to work and be scalable so it can handle many users.
+•	Frontend for user interaction
+
+•	Backend for logic and processing
+
+•	Database for storing user and claim data
+
+•	External APIs for weather and air quality
+
+•	AI module for risk and fraud detection
+
 
 🖥️ Tech Stack
 
-We use:
+•	Frontend: React.js
 
-* React.js for the frontend
+•	Backend: Node.js
 
-* Node.js for the backend
+•	Database: MySQL
 
-* MySQL for the database
+•	APIs: Weather + AQI APIs
 
-* APIs for weather and air quality
 
-🛠️ Phase 1 Implementation
+🚀 Future Improvements
 
-In the phase we:
+•	Full system implementation
 
-* Designed the whole system
+•	Real-time API integration
 
-* Created prototypes for the user interface
+•	Advanced machine learning models
 
-* Developed the intelligence for pricing
+•	Fully automated claim system
+•	Better fraud detection using behaviour analysis
 
-* Figured out when the system should automatically help them
-
-* Planned how to prevent fraud
-
-🚀 Future Scope
-
-Next we plan to:
-
-* Finish the frontend and backend
-
-* Use real-time APIs for weather and air quality
-
-* Use intelligence, in the real system
-
-* Make it so claims and payouts are automatic
-
-* Make the fraud detection better using machine learning
